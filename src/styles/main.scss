@@ -1,0 +1,87 @@
+@import "_variables";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: $canvas-bg-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.test {
+  .wrapper {
+    position: absolute;
+    width: $total-width;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .tile-image {
+    width: 140%;
+    position: relative;
+    z-index: 1;
+    transform-style: preserve-3d;
+  }
+  .floor {
+    transform: rotateX(55deg) rotateZ(45deg);
+    transform-style: preserve-3d;
+    font-size: 0;
+    .tile-wrapper {
+      &:hover {
+        transition: 0.5s;
+        transform: translate(0-$selected-tile-height, 0-$selected-tile-height);
+      }
+    }
+    .tile {
+      box-sizing: border-box;
+      cursor: pointer;
+      font-size: 11pt;
+      color: #ccc;
+      display: inline-block;
+      background: $tile-base-color;
+      width: $tile-size-width;
+      height: $tile-size-height;
+      margin: 0;
+      box-shadow: 0 0 0 0.1em hsla(0, 0%, 0%, 0.2);
+      border: solid 1px $tile-border-color;
+      line-height: 48px;
+      text-align: center;
+      position: relative;
+      vertical-align: top;
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+      }
+      &::before {
+        /*right side*/
+        top: $selected-tile-height/2;
+        right: -1 -$selected-tile-height;
+        /**/
+        width: $selected-tile-height;
+        height: 100%;
+        background: $tile-side-right;
+        transform: rotate(0deg) skewY(45deg);
+      }
+      &::after {
+        /*left side*/
+        bottom: -1 -$selected-tile-height;
+        left: $selected-tile-height/2;
+        /**/
+        height: $selected-tile-height;
+        width: 100%;
+        background: $tile-side-left;
+        transform: rotate(0deg) skewX(45deg);
+      }
+      &:hover {
+        transition: 0.5s;
+        transform: translate(0-$selected-tile-height, 0-$selected-tile-height);
+      }
+    }
+  }
+}

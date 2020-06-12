@@ -1,0 +1,73 @@
+// DIMENSIONS
+$tile-dimensions: 100px;
+$number-of-tiles: 5;
+// DIMENSIONS - Advanced
+$total-width: $tile-dimensions * $number-of-tiles;
+$tile-size-width: $tile-dimensions;
+$tile-size-height: $tile-dimensions;
+$selected-tile-height: 30px;
+// COLOR
+$canvas-bg-color: linear-gradient(
+  190deg,
+  rgba(0, 0, 0, 1) 0%,
+  rgba(59, 9, 121, 1) 50%,
+  rgba(97, 0, 255, 1) 100%
+);
+$tile-border-color: #13e8e9;
+$tile-base-color: #231e94;
+$tile-side-left: #120e70;
+$tile-side-right: #03004b;
+
+// GREEN
+$tile-dimensions: 80px;
+$number-of-tiles: 5;
+$total-width: $tile-dimensions * $number-of-tiles;
+$tile-size-width: $tile-dimensions;
+$tile-size-height: $tile-dimensions;
+$selected-tile-height: 100px;
+$canvas-bg-color: linear-gradient(
+  0deg,
+  rgba(1, 51, 97, 1) 0%,
+  rgba(9, 62, 121, 1) 35%,
+  rgba(0, 212, 255, 1) 100%
+);
+$tile-border-color: #54851a;
+$tile-base-color: #78a012;
+$tile-side-left: #a0d126;
+$tile-side-right: #4b6e1b;
+
+// Machine
+$tile-dimensions: 90px;
+$number-of-tiles: 5;
+$total-width: $tile-dimensions * $number-of-tiles;
+$tile-size-width: $tile-dimensions;
+$tile-size-height: $tile-dimensions;
+$selected-tile-height: 10px;
+$canvas-bg-color: linear-gradient(
+  0deg,
+  rgb(92, 92, 92) 0%,
+  rgb(48, 47, 47) 35%,
+  rgb(53, 53, 53) 100%
+);
+$tile-border-color: gray;
+$tile-base-color: white;
+$tile-side-left: lightgray;
+$tile-side-right: gray;
+
+// Machine
+// $tile-dimensions: 90px;
+// $number-of-tiles: 5;
+// $total-width: $tile-dimensions * $number-of-tiles;
+// $tile-size-width: $tile-dimensions;
+// $tile-size-height: $tile-dimensions;
+// $selected-tile-height: 10px;
+// $canvas-bg-color: linear-gradient(
+//   0deg,
+//   rgb(0, 0, 0) 0%,
+//   rgb(0, 0, 0) 35%,
+//   rgb(0, 0, 0) 100%
+// );
+// $tile-border-color: gray;
+// $tile-base-color: transparent;
+// $tile-side-left: lightgray;
+// $tile-side-right: gray;
