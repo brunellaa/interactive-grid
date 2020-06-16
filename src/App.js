@@ -1,5 +1,4 @@
 import React from "react";
-import "./App.css";
 import "./styles/main.scss";
 import Grid from "./components/Grid";
 
