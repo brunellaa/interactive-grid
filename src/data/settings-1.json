@@ -1,0 +1,81 @@
+{
+    "theme": {
+        "numberOfRows": 3,
+        "tileDimensions": 160,
+        "selectedTileHeight": 20,
+        "canvasBgColor": "lightgray",
+        "tileBaseColor": "teal",
+        "tileBorderColor": "lightgray",
+        "tileSideLeft": "blue",
+        "tileSideRight": "green",
+        "hideImages": true,
+        "imageFilter": "none",
+        "imageHoverFilter": "brightness(1.3)",
+        "imagehighlights": "transparent",
+        "tooltip": {
+            "backgroundColor": "#000",
+            "titleColor": "rgb(24, 198, 252)",
+            "titleSize": "20px",
+            "textColor": "#fff",
+            "textSize": "14px"
+        },
+        "modalTheme": {
+            "modalBgColor": "#000",
+            "modalFullWidth": true
+        }
+    },
+    "gridData": [
+        [
+            {
+                "id": "r0c0",
+                "title": "Grid Title ",
+                "description": "Description ",
+                "image": "test-img-mid"
+            },
+            {
+                "id": "r0c1",
+                "title": "Grid Title",
+                "image": "test-img-mid"
+            },
+            {
+                "id": "r0c2",
+                "title": "Grid Title",
+                "image": "test-img-mid"
+            }
+        ],
+        [
+            {
+                "id": "r1c0",
+                "title": "Grid Title ",
+                "image": "test-img-mid"
+            },
+            {
+                "id": "r1c1",
+                "title": "Grid Title",
+                "image": "test-img-mid"
+            },
+            {
+                "id": "r1c2",
+                "title": "Grid Title",
+                "image": "test-img-mid"
+            }
+        ],
+        [
+            {
+                "id": "r2c0",
+                "title": "Grid Title ",
+                "image": "test-img-mid"
+            },
+            {
+                "id": "r2c1",
+                "title": "Grid Title",
+                "image": "test-img-mid"
+            },
+            {
+                "id": "r2c2",
+                "title": "Grid Title",
+                "image": "test-img-mid"
+            }
+        ]
+    ]
+}
