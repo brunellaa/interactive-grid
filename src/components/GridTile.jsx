@@ -1,72 +1,137 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-
-const theme = {
-  // ** RETRO NIGHT
-  tileDimensions: 100,
-  selectedTileHeight: 20,
-  tileBaseColor: "#231e94",
-  tileBorderColor: "#13e8e9",
-  tileSideLeft: "#120e70",
-  tileSideRight: "#03004b",
-};
+import ModalWrapper from "./ModalWrapper";
 
 const TileContainer = styled.div`
-  box-sizing: border-box;
-  cursor: pointer;
-  font-size: 11pt;
-  color: #ccc;
+  transform-style: preserve-3d;
+  pointer-events: none;
   display: inline-block;
-  background: ${theme.tileBaseColor};
-  width: ${theme.tileDimensions + "px"};
-  height: ${theme.tileDimensions + "px"};
-  box-shadow: 0 0 0 0.1em hsla(0, 0%, 0%, 0.2);
-  border: solid 1px ${theme.tileBorderColor};
-  line-height: 48px;
-  text-align: center;
   position: relative;
-  vertical-align: top;
+  cursor: pointer;
+  width: ${(props) => props.settings.theme.tileDimensions + "px"};
+  height: ${(props) => props.settings.theme.tileDimensions + "px"};
+  .tile-image {
+    display: ${(props) =>
+      props.settings.theme.hideImages ? "none" : "initial"};
+    filter: ${(props) => props.settings.theme.imageFilter};
+    position: absolute;
+    transform-style: preserve-3d;
+    transform: rotateZ(-45deg) rotateX(-55deg);
+    transform-origin: 0px 0px
+      ${(props) => props.settings.theme.tileDimensions * 4.21 + "px"};
+    width: ${(props) => props.settings.theme.tileDimensions * 1.4 + "px"};
+    bottom: ${(props) => -props.settings.theme.tileDimensions * 4.24 + "px"};
+    right: ${(props) => -props.settings.theme.tileDimensions * 2.46 + "px"};
+  }
+  .tile-floor {
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    pointer-events: ${(props) =>
+      props.settings.tile.disabled ? "none" : "initial"};
+    background: ${(props) => props.settings.theme.tileBaseColor};
+    border: solid 1px ${(props) => props.settings.theme.tileBorderColor};
+    &:hover + .tile-image {
+      background: ${(props) => props.settings.theme.imagehighlights};
+      filter: ${(props) => props.settings.theme.imageHoverFilter};
+    }
+    &:hover ~ .tile-tooltip {
+      visibility: visible;
+    }
+  }
+  .tile-tooltip {
+    transform-style: preserve-3d;
+    transform: translateZ(225px) rotateZ(-45deg) rotateX(-55deg);
+    width: 100%;
+    margin-left: 40%;
+    text-align: center;
+    pointer-events: none;
+    position: absolute;
+    padding: 10px;
+    visibility: hidden;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    color: #fff;
+    top: 100px;
+    z-index: 999999;
+    font-size: ${(props) => props.settings.theme.tooltip.textSize};
+    h1 {
+      color: ${(props) => props.settings.theme.tooltip.titleColor};
+      font-size: ${(props) => props.settings.theme.tooltip.titleSize};
+    }
+  }
   &::before,
   &::after {
     content: "";
     position: absolute;
+    transform-style: preserve-3d;
   }
   &::before {
     /*right side*/
-    top: ${theme.selectedTileHeight / 2 + "px"};
-    right: ${-1 - theme.selectedTileHeight + "px"};
-    /**/
-    width: ${theme.selectedTileHeight + "px"};
     height: 100%;
-    background: ${theme.tileSideRight};
     transform: rotate(0deg) skewY(45deg);
+    top: ${(props) => props.settings.theme.selectedTileHeight / 2 + "px"};
+    right: ${(props) => -1 - props.settings.theme.selectedTileHeight + "px"};
+    width: ${(props) => props.settings.theme.selectedTileHeight + "px"};
+    background: ${(props) => props.settings.theme.tileSideRight};
   }
   &::after {
     /*left side*/
-    bottom: ${-1 - theme.selectedTileHeight + "px"};
-    left: ${theme.selectedTileHeight / 2 + "px"};
-    /**/
-    height: ${theme.selectedTileHeight + "px"};
     width: 100%;
-    background: ${theme.tileSideLeft};
     transform: rotate(0deg) skewX(45deg);
+    left: ${(props) => props.settings.theme.selectedTileHeight / 2 + "px"};
+    bottom: ${(props) => -1 - props.settings.theme.selectedTileHeight + "px"};
+    height: ${(props) => props.settings.theme.selectedTileHeight + "px"};
+    background: ${(props) => props.settings.theme.tileSideLeft};
   }
   &:hover {
+    &::before,
+    &::after {
+      opacity: 0.7;
+      transition: 1s;
+    }
     transition: 0.5s;
     transform: translate(
-      ${0 - theme.selectedTileHeight + "px"},
-      ${0 - theme.selectedTileHeight + "px"}
+      ${(props) => 0 - props.settings.theme.selectedTileHeight + "px"},
+      ${(props) => 0 - props.settings.theme.selectedTileHeight + "px"}
     );
   }
 `;
 
-export default function Tile() {
-  console.log("hey");
+export default function Tile(props) {
+  const {
+    tile,
+    tile: { modal: modalData, link },
+  } = props;
+  const [isModalOpen, setModal] = useState(false);
+
+  const handleTileClick = () => {
+    if (link && link !== "") {
+      window.open(link);
+    } else {
+      setModal(true);
+    }
+  };
 
   return (
-    <TileContainer>
-      {/* <img className="tile-image" src={CityTile} alt="tile" />
-      <div className="tile-floor" /> */}
+    <TileContainer settings={props}>
+      <div className="tile-floor" onClick={handleTileClick} />
+      <img
+        className="tile-image"
+        src={require(`../assets/${tile.image}.png`)}
+        alt="tile"
+      />
+      <div className="tile-tooltip">
+        <h1>{props.tile.title}</h1>
+        <p>{props.tile.description}</p>
+      </div>
+      {modalData && isModalOpen && (
+        <ModalWrapper
+          isModalOpen={isModalOpen}
+          setModal={setModal}
+          modalData={modalData}
+        />
+      )}
     </TileContainer>
   );
 }
